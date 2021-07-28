@@ -14,3 +14,5 @@
 - 11:20 - 12:45: design database and end points with jwt including testing
 ---
 
+#### Part 1 completed in around 2 hours 40mins
+
