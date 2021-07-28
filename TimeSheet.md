@@ -11,6 +11,6 @@
 - 16:25 - 16:45 : design database and end points with jwt
 ---
 ###### 28 jul'21
-- 11:20 - 12:45: design database and end points with jwt
+- 11:20 - 12:45: design database and end points with jwt including testing
 ---
 
