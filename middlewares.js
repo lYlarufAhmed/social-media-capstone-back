@@ -9,12 +9,9 @@ const verifyRequestHeader = async (req, res, next) => {
             next()
         } catch (e) {
             console.log(e.message)
-            res.sendStatus(401)
         }
-    } else {
-        console.log('no authrization')
-        res.sendStatus(401)
     }
+    res.sendStatus(401)
     // get the token
     // verfy the token
 }

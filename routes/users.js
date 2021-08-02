@@ -90,15 +90,34 @@ router.route('/login')
     })
 
 router.route('/logout')
-    .post(async (req, res) => {
-        let data = req.body
-        console.log(data)
+    .get(async (req, res) => {
+        let userId = req.body.userId
         try {
-            await logOutUser(data)
+            await logOutUser(userId)
         } catch (e) {
             console.log(e.message)
         }
         res.sendStatus(200)
+    })
+
+router.route('/token')
+    .post(async (req, res) => {
+        // request new accessToken
+        let refreshToken = req.body.refreshToken
+        if (refreshToken) {
+            // refreshToken is provided
+            try {
+                let payload = await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+                let accessToken = await jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET,
+                    {expiresIn: process.env.ACCESS_TOKEN_EXPIRY})
+                res.json({success: true, accessToken})
+                res.send()
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+        // refreshToken is expired
+        res.sendStatus(403)
     })
 
 

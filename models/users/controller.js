@@ -14,8 +14,8 @@ const updateRefreshToken = async (username, refreshToken) => {
     await User.updateOne({username}, {refreshToken})
 }
 
-const logOutUser = async ({refreshToken}) => {
-    await User.updateOne({refreshToken}, {refreshToken: ''})
+const logOutUser = async (userId) => {
+    await User.findByIdAndUpdate(userId, {refreshToken: ''})
 }
 
 const createNewUser = async ({email, password, username, fullName, avatar}) => {
