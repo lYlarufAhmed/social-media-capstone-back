@@ -6,7 +6,8 @@ const userSchema = new mg.Schema({
         type: String,
         unique: true,
         required: true,
-        index: true
+        index: true,
+        min: 6
     },
     "email": {
         type: String,
@@ -24,8 +25,14 @@ const userSchema = new mg.Schema({
     },
     "profileImage": {
         type: String,
-        unique: true
-    }
+    },
+    "fullName": String,
+    posts: [
+        {
+            type: mg.Schema.Types.ObjectId,
+            ref: "Post"
+        }
+    ]
 }, {timestamps: true})
 
 const User = mg.model('User', userSchema)

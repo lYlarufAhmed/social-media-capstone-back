@@ -16,3 +16,7 @@
 
 #### Part 1 completed in around 2 hours 40mins
 
+part 3
+10:30: 12:00 -- done
+
+

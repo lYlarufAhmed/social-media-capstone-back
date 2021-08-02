@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const usersRouter = require('./routes/users')
+const postsRouter = require('./routes/posts')
 require('dotenv').config()
 const cors = require('cors')
 
@@ -17,6 +18,7 @@ app.use(express.static('static'))
 
 
 app.use('/users', usersRouter)
+app.use('/posts', postsRouter)
 app.get('/', (req, res) => {
     res.send('Success!')
 })

@@ -6,8 +6,10 @@ const multer = require('multer')
 // jwt
 const jwt = require('jsonwebtoken')
 
-const {logInUser, searchUser, createNewUser,
-    updateRefreshToken, logOutUser} = require('../models/users/controller')
+const {
+    logInUser, searchUser, createNewUser,
+    updateRefreshToken, logOutUser
+} = require('../models/users/controller')
 
 
 // modified storage object to store them file storage
@@ -31,11 +33,22 @@ router.route('/')
 router.route('/signup')
     .post(upload.single('avatar'), async (req, res) => {
         // accept the data
+        let status
         const data = req.body
-        console.log(data)
         console.log(req.file)
         if (req.file) data.avatar = req.file.filename
-        let status = await createNewUser(data)
+        console.log(data)
+        let taken = []
+        status = await searchUser({username: data.username})
+        if (status.result && status.result.length) taken.push('username')
+        status = await searchUser({email: data.email})
+        if (status.result && status.result.length) taken.push('email')
+        if (taken.length) {
+            status = {}
+            status.success = false
+            status.message = `${taken.join(' and ')} already taken`
+        } else
+            status = await createNewUser(data)
         // console.log(data)
         res.json(status)
 
@@ -48,10 +61,10 @@ router.route('/login')
         let status = {}
         try {
             // find out the user with username and match the password
-            let email = await logInUser(data)
-            if (email) {
+            let userId = await logInUser(data)
+            if (userId) {
                 status.success = true
-                let payload = {email}
+                let payload = {userId}
 
                 let refreshToken = await jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET,
                     {expiresIn: process.env.REFRESH_TOKEN_EXPIRY})
@@ -80,7 +93,7 @@ router.route('/logout')
     .post(async (req, res) => {
         let data = req.body
         console.log(data)
-        try{
+        try {
             await logOutUser(data)
         } catch (e) {
             console.log(e.message)
