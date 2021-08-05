@@ -8,6 +8,7 @@ const cors = require('cors')
 
 
 app.use(morgan('tiny'))
+app.use(express.static('static'))
 app.use(cors())
 
 

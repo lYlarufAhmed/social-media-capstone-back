@@ -17,6 +17,9 @@
 #### Part 1 completed in around 2 hours 40mins
 
 part 3
-10:30: 12:00 -- done
+10:30: 1:30 -- done
+
+part4:
+1:30 -   -- interceptor setup
 
 

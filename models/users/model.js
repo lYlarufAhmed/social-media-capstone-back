@@ -27,12 +27,19 @@ const userSchema = new mg.Schema({
         type: String,
     },
     "fullName": String,
-    posts: [
+    "posts": [
         {
             type: mg.Schema.Types.ObjectId,
             ref: "Post"
         }
-    ]
+    ],
+    "followers": [{
+        type: String,
+    }],
+    "followings": [{
+        type: String,
+    }],
+    "isFollowing": Boolean
 }, {timestamps: true})
 
 const User = mg.model('User', userSchema)
