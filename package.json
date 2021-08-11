@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon start"
+    "start": "npm start",
+    "dev-start": "nodemon start"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,8 @@
     "dotenv": "^10.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

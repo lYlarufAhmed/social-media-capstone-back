@@ -147,10 +147,11 @@ router.route('/login')
     })
 
 router.route('/logout')
-    .get(verifyRequestHeader, async (req, res) => {
-        let userId = req.userId
+    .post(async (req, res) => {
+        console.log(req.body)
+        let { username } = req.body
         try {
-            await logOutUser(userId)
+            await logOutUser(username)
             res.sendStatus(200)
         } catch (e) {
             console.log(e.message)
