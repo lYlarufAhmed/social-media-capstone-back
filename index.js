@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.send('Success!')
 })
 
-app.listen(process.env.PORT || 3131, () => {
+app.listen(process.env.PORT || 5000, () => {
     const mg = require('mongoose')
 
     mg.connect(process.env.MONGODB_URL, {
@@ -37,5 +37,5 @@ app.listen(process.env.PORT || 3131, () => {
         else
             console.log('connected to db')
     })
-    console.log('Listening on: ', process.env.PORT || 3131)
+    console.log('Listening on: ', process.env.PORT || 5000)
 })
